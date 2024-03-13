@@ -17,7 +17,7 @@ def lambda_handler(event, context):
         resp = s3_client.get_object(Bucket=bucket_name, Key=s3_file_key)
         
         print(resp['Body'])
-        df_s3_data = pd.read_json(resp['Body'], sep=",")
+        df_s3_data = pd.read_json(resp['Body'])
         df_delivered = df_s3_data[df_s3_data.status == 'delivered']
         print(df_delivered)
         json_string = df_delivered.to_json(orient='records')
@@ -25,7 +25,7 @@ def lambda_handler(event, context):
         file_name = f"{current_date}-processed.json"
 
         tgt_bucket_name = 'aws-de-doordash-target-zn'
-        file_path = 'processed_data/file_name.json'
+        file_path = 'processed_data/'+file_name
         s3_client.put_object(Body=json_string, Bucket=tgt_bucket_name, Key=file_path)
 
         message = "Input S3 File {} has been processed succesfuly !!".format("s3://"+tgt_bucket_name+"/"+file_path)
