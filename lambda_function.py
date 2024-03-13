@@ -12,14 +12,11 @@ def lambda_handler(event, context):
     try:
         bucket_name = event["Records"][0]["s3"]["bucket"]["name"]
         s3_file_key = event["Records"][0]["s3"]["object"]["key"]
-        print(bucket_name)
-        print(s3_file_key)
         resp = s3_client.get_object(Bucket=bucket_name, Key=s3_file_key)
         
-        print(resp['Body'])
         df_s3_data = pd.read_json(resp['Body'])
         df_delivered = df_s3_data[df_s3_data.status == 'delivered']
-        print(df_delivered)
+        
         json_string = df_delivered.to_json(orient='records')
         current_date = datetime.datetime.now().strftime("%Y-%m-%d")
         file_name = f"{current_date}-processed.json"
