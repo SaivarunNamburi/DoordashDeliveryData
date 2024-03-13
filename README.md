@@ -3,6 +3,7 @@
 ## Overview
 This project automates the processing of daily delivery data from DoorDash using AWS services. JSON files containing delivery records are uploaded to an S3 bucket, triggering an AWS Lambda function to filter and process the data. Notifications are sent via Amazon SNS.
 
+![Architecture Diagram](ArchitectureDiag.png)
 ## Requirements
 - AWS Account
 - Amazon S3 buckets: `doordash-landing-zn` and `doordash-target-zn`
