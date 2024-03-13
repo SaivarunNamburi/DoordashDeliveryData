@@ -6,7 +6,7 @@ import os
 
 s3_client = boto3.client('s3')
 sns_client = boto3.client('sns')
-sns_arn = os.environ.get['AWS_SNS_ARN']
+sns_arn = os.environ.get('AWS_SNS_ARN')
 
 def lambda_handler(event, context):
     try:
