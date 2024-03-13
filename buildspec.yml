@@ -5,7 +5,7 @@ phases:
       python: 3.11
     commands:
       - echo "Installing dependencies..."
-      - pip install -r requirements.txt -t lib
+      # - pip install -r requirements.txt -t lib
   build:
     commands:
       - echo "Zipping deployment package..."
